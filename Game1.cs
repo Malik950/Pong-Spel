@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using Template.Template;
 
 namespace Template
 {
@@ -26,11 +27,21 @@ namespace Template
         Texture2D playerAI_texture;
         Random rand;
         private float _timer;
+        SpriteFont Font;
+        float time = 0;
+
+        //paus
+        bool paused = false;
+        Texture2D PausedTexture;
+        Rectangle PausedRectangle;
+        Button btnPlay, btnQuit;
+        bool GamePaused;
+        
         //KOmentar
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-           // graphics.IsFullScreen = true;
+           graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             screen = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             rand = new Random();
@@ -63,6 +74,8 @@ namespace Template
             // Alla sprites ritas här
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            IsMouseVisible = true;
+
             playerTexture = Content.Load<Texture2D>("player");
             player = new Player(playerTexture, new Vector2(offsetPlayer, screen.Height / 2 - playerTexture.Height / 2), Vector2.Zero, 5f, screen);
 
@@ -75,6 +88,16 @@ namespace Template
 
             scorePlayer = Content.Load<SpriteFont>("ScoreFont");
             scoreAI = Content.Load<SpriteFont>("ScoreFont");
+
+            Font = Content.Load<SpriteFont>("Time");
+
+            //paus
+            PausedTexture = Content.Load<Texture2D>("Paused");
+            PausedRectangle = new Rectangle(0, 0, PausedTexture.Width, PausedTexture.Height);
+            btnPlay = new Button();
+            btnPlay.Load(Content.Load<Texture2D>("Play"), new Vector2(200, 225));
+            btnQuit = new Button();
+            btnQuit.Load(Content.Load<Texture2D>("Pause"), new Vector2(200, 275));
 
             Restart();
         }
@@ -113,7 +136,7 @@ namespace Template
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            
         }
 
         /// <summary>
@@ -123,6 +146,9 @@ namespace Template
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+
+            time += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             _timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if(_timer <= 0)
@@ -161,6 +187,29 @@ namespace Template
                     break;
             }
 
+            MouseState mouse = Mouse.GetState();
+
+            if (!paused)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                {
+                    paused = true;
+                    btnPlay.isClicked = false;
+                }
+
+            }
+
+            else if (paused)
+            {
+                if (btnPlay.isClicked)
+                    paused = false;
+                if (btnQuit.isClicked)
+                    Exit();
+
+                btnPlay.Update(mouse);
+                btnQuit.Update(mouse);
+            }
+
             base.Update(gameTime);
         }
 
@@ -192,6 +241,17 @@ namespace Template
             player.Draw(spriteBatch);
                 ball.Draw(spriteBatch);
             playerAI.Draw(spriteBatch);
+
+            //Timer
+            spriteBatch.DrawString(Font, "Session Time:" + time.ToString("0.00"), new Vector2(100, 50), Color.Black);
+
+            //pause
+            if (paused)
+            {
+                spriteBatch.Draw(PausedTexture, PausedRectangle, Color.White);
+                btnPlay.Draw(spriteBatch);
+                btnQuit.Draw(spriteBatch);
+            }
 
             spriteBatch.End();
 

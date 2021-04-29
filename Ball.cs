@@ -19,7 +19,7 @@ namespace Template
         }
 
         public override void Update(GameTime gameTime)
-        //hastighet ökar ju
+        //hastighet ökar 
         {
             BoundsScreen();
 
