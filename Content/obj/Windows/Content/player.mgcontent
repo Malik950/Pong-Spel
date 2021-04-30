@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/cozzi/Downloads/Monogame-template-master/Template/Template/Content/player.png</SourceFile>
-  <SourceTime>2021-04-27T18:27:46.8093573+02:00</SourceTime>
-  <DestFile>C:/Users/cozzi/Downloads/Monogame-template-master/Template/Template/Content/bin/Windows/Content/player.xnb</DestFile>
-  <DestTime>2021-04-27T18:28:22.316164+02:00</DestTime>
+  <SourceFile>C:/Users/cozzi/OneDrive/Desktop/Pong-Spel-main/Content/player.png</SourceFile>
+  <SourceTime>2021-04-30T11:03:21+02:00</SourceTime>
+  <DestFile>C:/Users/cozzi/OneDrive/Desktop/Pong-Spel-main/Content/bin/Windows/Content/player.xnb</DestFile>
+  <DestTime>2021-04-30T14:26:20.6055174+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

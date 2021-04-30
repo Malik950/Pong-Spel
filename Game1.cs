@@ -41,7 +41,7 @@ namespace Template
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-          // graphics.IsFullScreen = true;
+         // graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             screen = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             rand = new Random();
@@ -84,7 +84,7 @@ namespace Template
 
 
             playerAI_texture = Content.Load<Texture2D>("player");
-            playerAI = new Player_AI(playerAI_texture, new Vector2(screen.Width - playerAI_texture.Width / 2, screen.Height - playerAI_texture.Height), Vector2.Zero, 5f, screen);
+            playerAI = new Player_AI(playerAI_texture, new Vector2(screen.Width - playerAI_texture.Width / 2, screen.Height - playerAI_texture.Height / 2), Vector2.Zero, 5f, screen);
 
             scorePlayer = Content.Load<SpriteFont>("ScoreFont");
             scoreAI = Content.Load<SpriteFont>("ScoreFont");
@@ -225,12 +225,10 @@ namespace Template
             {
                 case GameState.MainMenu:
                     GraphicsDevice.Clear(Color.CornflowerBlue);
-                        Currentstate = GameState.ColorSelect;
                     break;
 
                 case GameState.ColorSelect:
                     GraphicsDevice.Clear(Color.GreenYellow);
-                        Currentstate = GameState.MainMenu;
                     break;
             }
 
